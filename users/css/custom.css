@@ -1,0 +1,18 @@
+.navbar{
+	background-color: #f9c236;
+}
+
+.btn-primary{
+  background-color: #f9c236;
+  border-color: #f9c236;
+  width: 300px;
+}
+
+.form-control{
+	width: 650px;
+}
+
+.input-medium {
+ 	width: 200px;
+ 	height: 40px;
+} 
