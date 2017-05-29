@@ -19,49 +19,35 @@ $result= mysqli_query($conex, $consulta);
 $query_locali = "SELECT localidad, provincia FROM localidades";
 $result_locali = mysqli_query($conex, $query_locali);
 
-// if(isset($_POST['titulo'])){
-// 	$titulo= $_POST['titulo'];	
-// }
+//insertando en db
 
-// if(isset($_POST['descripcion'])){
-// 	if(!empty($_POST['descripcion'])){
-// 		$descripcion= $_POST['descripcion'];	
-// 	}
-// 	else{
-// 	echo 'Debe completar el campo descripcion';
-// 	}
-// }
+if($_POST){
+	$tit=$_POST['titulo'];
+	$desc=$_POST['descripcion'];
+	$ubicacion= $_POST['ubicacion'];
+ 	$ubicacion_explode= explode(' - ', $ubicacion);
+	$localidad= $ubicacion_explode[0];
+	$provincia= $ubicacion_explode[1];
+	$cat=$_POST['categoria'];
+	$usu_id=($user->data()->id);
+	// $imageName = mysqli_real_escape_string($_FILES["foto"]["name"]);
+	$imageData = mysqli_real_escape_string($conex, file_get_contents($_FILES['foto']['tmp_name']));
+	if($_POST['fecha_exacta']){
+	 $fecha_exacta= $_POST['fecha_exacta'];
+	}else {
+		$fecha_exacta= NULL;
+	  }
 
-// if(isset($_POST['ubicacion'])){
-// 	$ubicacion= $_POST['ubicacion'];
-// 	$ubicacion_explode= explode(' - ', $ubicacion);
-// 	$localidad= $ubicacion_explode[0];
-// 	$provincia= $ubicacion_explode[1];
-// }
-// else{
-// 	echo 'Debe completar el campo ubicación';
-// }
+	 $sql="INSERT INTO gauchada (titulo, descripcion, provincia, localidad, id_usuario, categoria, imagen, fecha_desde, fecha_hasta, fecha_exacta)
+	 						VALUES ('$tit', '$desc', '$provincia', '$localidad', '$usu_id', '$cat', '$imageData', CURDATE() , ADDDATE(CURDATE(), 60), '$fecha_exacta')";
+	 if (mysqli_query($conex, $sql)) {
+     	echo "New record created successfully";
+	 } else {
+   	echo "Error: " . $sql . "<br>" . mysqli_error($conex);
+   }
+}
 
-// if(isset($_POST['titulo'])){
-// 	$titulo= $_POST['titulo'];	
-// }
 
-// if(isset($_POST['categoria'])){
-// 	$categoria= $_POST['categoria'];
-// }
-
-// if(isset($_POST['fecha'])){
-// 	$fecha_exacta= $_POST['fecha'];	
-// }else{
-// 	$fecha_exacta= NULL;
-// }
-
-// $id_usuario= $user->data()->id;
-
-// $consulta_categoria= 'SELECT id_categoria FROM categoria WHERE nombre= $categoria';
-// $id_categoria= mysqli_query($conex, $consulta_categoria);
-// $consulta_insertar= 'INSERT INTO gauchada(titulo, descripcion, provincia, ciudad, id_usuario, id_categoria, fecha_exacta) VALUES($titulo, $descripcion, $provincia, $localidad, $id_usuario, $id_categoria, $fecha_exacta)';
-// mysqli_query($conex, $consulta_insertar);
 
 ?>
 
