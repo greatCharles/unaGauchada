@@ -95,6 +95,8 @@ if($settings->track_guest == 1 && $user->isLoggedIn()){
 	new_user_online($user_id);
 
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,6 +106,22 @@ if($settings->track_guest == 1 && $user->isLoggedIn()){
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
+
+	<script type="text/javascript">
+		
+	      function showMe (box) {
+	        var chboxs = document.getElementsByName("c1");
+	        var vis = "none";
+	        for(var i=0;i<chboxs.length;i++) { 
+	            if(chboxs[i].checked){
+	             vis = "block";
+	                break;
+	            }
+	        }
+	        document.getElementById(box).style.display = vis;    
+	       }
+
+	</script>
 
 	<?php
 	if(file_exists($abs_us_root.$us_url_root.'usersc/includes/head_tags.php')){
