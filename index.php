@@ -13,11 +13,19 @@ require_once $abs_us_root.$us_url_root.'users/includes/navigation.php';
 
 
 
-if($_SESSION){
-	$publica="users/publicar_gauchada.php";
+// if($_SESSION){
+// 	$publica="users/publicar_gauchada.php";
+// }else {
+// 	$publica="users/login.php";
+// }
+
+
+if($user->isLoggedIn()){
+    $publica="users/publicar_gauchada.php";
 }else {
-	$publica="users/login.php";
+    $publica="users/login.php";
 }
+
 
 
 
