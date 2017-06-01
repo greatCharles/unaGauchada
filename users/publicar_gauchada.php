@@ -22,31 +22,61 @@ $result_locali = mysqli_query($conex, $query_locali);
 //insertando en db
 
 if($_POST){
+	// $tit=$_POST['titulo'];
+	// $desc=$_POST['descripcion'];
+	// $ubicacion= $_POST['ubicacion'];
+ // 	$ubicacion_explode= explode(' - ', $ubicacion);
+	// $localidad= $ubicacion_explode[0];
+	// $provincia= $ubicacion_explode[1];
+	// $cat=$_POST['categoria'];
+	// $usu_id=($user->data()->id);
+	// // $imageName = mysqli_real_escape_string($_FILES["foto"]["name"]);
+	// $imageData = mysqli_real_escape_string($conex, file_get_contents($_FILES['foto']['tmp_name']));
+	// if($_POST['fecha_exacta']){
+	//  $fecha_exacta= $_POST['fecha_exacta'];
+	// }else {
+	// 	$fecha_exacta= NULL;
+	//   }
+	//
+	//  $sql="INSERT INTO gauchada (titulo, descripcion, provincia, localidad, id_usuario, categoria, imagen, fecha_desde, fecha_hasta, fecha_exacta)
+	//  						VALUES ('$tit', '$desc', '$provincia', '$localidad', '$usu_id', '$cat', '$imageData', CURDATE() , ADDDATE(CURDATE(), 60), '$fecha_exacta')";
+	//  if (mysqli_query($conex, $sql)) {
+  //    	echo "New record created successfully";
+	// 		Redirect::to('publicacion_exitosa.php');
+	//  } else {
+  //  	echo "Error: " . $sql . "<br>" . mysqli_error($conex);
+  //  }
+	//Variables para insertar
 	$tit=$_POST['titulo'];
 	$desc=$_POST['descripcion'];
 	$ubicacion= $_POST['ubicacion'];
- 	$ubicacion_explode= explode(' - ', $ubicacion);
+	$ubicacion_explode= explode(' - ', $ubicacion);
 	$localidad= $ubicacion_explode[0];
 	$provincia= $ubicacion_explode[1];
 	$cat=$_POST['categoria'];
 	$usu_id=($user->data()->id);
-	// $imageName = mysqli_real_escape_string($_FILES["foto"]["name"]);
-	$imageData = mysqli_real_escape_string($conex, file_get_contents($_FILES['foto']['tmp_name']));
+	//Seteo variable en caso de que se necesita la gauchada para una fecha especifica
 	if($_POST['fecha_exacta']){
-	 $fecha_exacta= $_POST['fecha_exacta'];
-	}else {
-		$fecha_exacta= NULL;
-	  }
+		 $fecha_exacta= $_POST['fecha_exacta'];
+		}else {
+			$fecha_exacta= NULL;
+		}
+	//Muevo la foto a mi directorio local
+	$be_imageName       =   $_FILES["foto"]["name"];
+	$be_imageTempName   =   $_FILES["foto"]["tmp_name"];
+	$be_imageSize       =   $_FILES["foto"]["size"];
+	move_uploaded_file($be_imageTempName,"img_gauchadas/".$be_imageName);
+	//Inserto en la db
+	$sql="INSERT INTO gauchada (titulo, descripcion, provincia, localidad, id_usuario, categoria, imagen, fecha_desde, fecha_hasta, fecha_exacta)
+  						VALUES ('$tit', '$desc', '$provincia', '$localidad', '$usu_id', '$cat', '$be_imageName', CURDATE() , ADDDATE(CURDATE(), 60), '$fecha_exacta')";
+	if (mysqli_query($conex, $sql)) {
+		// echo "New record created successfully";
+		Redirect::to('publicacion_exitosa.php');
+		} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($conex);
+		}
 
-	 $sql="INSERT INTO gauchada (titulo, descripcion, provincia, localidad, id_usuario, categoria, imagen, fecha_desde, fecha_hasta, fecha_exacta)
-	 						VALUES ('$tit', '$desc', '$provincia', '$localidad', '$usu_id', '$cat', '$imageData', CURDATE() , ADDDATE(CURDATE(), 60), '$fecha_exacta')";
-	 if (mysqli_query($conex, $sql)) {
-     	echo "New record created successfully";
-	 } else {
-   	echo "Error: " . $sql . "<br>" . mysqli_error($conex);
-   }
 }
-
 
 
 ?>

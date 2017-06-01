@@ -17,12 +17,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 ?>
 <?php require_once 'init.php'; ?>
 <?php require_once $abs_us_root.$us_url_root.'users/includes/header.php'; ?>
 <?php require_once $abs_us_root.$us_url_root.'users/includes/navigation.php'; ?>
 
 <?php if (!securePage($_SERVER['PHP_SELF'])){die();}?>
+
 <?php
 $grav = get_gravatar(strtolower(trim($user->data()->email)));
 $get_info_id = $user->data()->id;
@@ -30,18 +32,18 @@ $get_info_id = $user->data()->id;
 $raw = date_parse($user->data()->join_date);
 $signupdate = $raw['month']."/".$raw['day']."/".$raw['year'];
 $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
- ?>
+?>
 
 <div id="page-wrapper">
 <div class="container">
 <div class="well">
 <div class="row">
-	<div class="col-xs-12 col-md-3">
+	<!-- <div class="col-xs-12 col-md-3">
 		<p><img src="<?=$grav; ?>" class="img-thumbnail" alt="Generic placeholder thumbnail"></p>
 		<p><a href="user_settings.php" class="btn btn-primary">Editar información de la cuenta</a></p>
 		<p><a class="btn btn-primary " href="profile.php?id=<?=$get_info_id;?>" role="button">Perfil público</a></p>
 
-	</div>
+	</div> -->
 	<div class="col-xs-12 col-md-9">
 		<h1><?=ucfirst($user->data()->username)?></h1>
 		<p><?=ucfirst($user->data()->fname)." ".ucfirst($user->data()->lname)?></p>
@@ -54,6 +56,9 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 </div> <!-- /container -->
 
 </div> <!-- /#page-wrapper -->
+
+
+
 
 <!-- footers -->
 <?php require_once $abs_us_root.$us_url_root.'users/includes/page_footer.php'; // the final html footer copyright row + the external js calls ?>
