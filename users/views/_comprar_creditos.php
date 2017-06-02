@@ -4,9 +4,9 @@
   	<br>
  	<div class="form-group">
  		<label for="cant">Cuantos créditos desea comprar?</label>
- 		<input  class="form-control" type="text" name="cant_creditos" placeholder="Ejemplo: 100 créditos" required="true"><br>
+ 		<input  class="form-control" min="1" max="500" type="number" name="cant_creditos" placeholder="Ejemplo: 100 créditos" required="true"><br>
  		<label for="num_tarj">Número de tarjeta de crédito: </label><br>
- 		<input type="text" class="form-control" name="num_tarjeta" placeholder="Ejemplo: 1234567812345678" required="true"><br>
+ 		<input type="number" maxlength="16" class="form-control" name="num_tarjeta" placeholder="Ejemplo: 1234567812345678" required="true"><br>
  		<label for="venc">Mes de Vencimiento</label>
  		<select name="mes" id="" class="form-control">
  			<option value="1">1</option>
@@ -33,11 +33,9 @@
  			<option value="2023">2023</option>
  		</select><br>
  		<label for="seg_cod">Código de seguridad</label>
- 		<input type="text" class="form-control" placeholder="Ejemplo:4772" name="cod_seg" required="true"><br>
+ 		<input type="number" maxlength="4" class="form-control" placeholder="Ejemplo:4772" name="cod_seg" required="true"><br>
 
 
 		<!-- <button class="submit btn btn-primary " type="submit" id="next_button"><i class="fa fa-plus-square"></i> Comprar</button> -->
 		<input type="submit" value="Submit">
  	</div>
-
-
