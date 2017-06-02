@@ -10,15 +10,26 @@
 
  	//si POST viene cargado significa que ya llenaron los datos, por lo tanto modificamos los creditos del usuario.
 	if ($_POST) {
-		$currentID = $user->data()->id;
-		$conex= mysqli_connect('localhost', 'root', '', 'db');
-		$consulta = "SELECT creditos FROM users WHERE id=$currentID";
-		$query= mysqli_query($conex, $consulta);
-		$array_credito = mysqli_fetch_assoc($query);
-		$saldo_previo = $array_credito['creditos'];
-		$saldo_posterior = $saldo_previo + $_POST['cant_creditos'];
-		$updateQuery = "UPDATE users SET creditos=$saldo_posterior WHERE id=$currentID";
-		mysqli_query($conex, $updateQuery);
+		$num_tarjeta = $_POST['num_tarjeta'];
+		$cod_seg = $_POST['cod_seg'];
+		// Si el numero de la tarjeta tiene 16 digitos y el codigo de seguridad tiene 3 entonces agrego el nuevo saldo.
+		if (mb_strlen($num_tarjeta) == 16  && (mb_strlen($cod_seg) == 3)) {
+			$currentID = $user->data()->id;
+			$conex= mysqli_connect('localhost', 'root', '', 'db');
+			$consulta = "SELECT creditos FROM users WHERE id=$currentID";
+			$query= mysqli_query($conex, $consulta);
+			$array_credito = mysqli_fetch_assoc($query);
+			$saldo_previo = $array_credito['creditos'];
+			$saldo_posterior = $saldo_previo + $_POST['cant_creditos'];
+			$updateQuery = "UPDATE users SET creditos=$saldo_posterior WHERE id=$currentID";
+			mysqli_query($conex, $updateQuery);
+			// redirigimos a pantalla de éxito
+			header("Location:compra_exitosa.php?creditos_comprados=".urlencode($_POST['cant_creditos']));  
+		}elseif (mb_strlen($num_tarjeta) != 16 || mb_strlen($cod_seg) != 3) {
+			// emitimos alerta
+			echo '<script language="javascript">alert("Asegúrate de que el número de la tarjeta de crédito tenga 16 dígitos y el código de seguridad 4! ");</script>'; 
+		}
+		
 	}
 
 	// $errores='';
