@@ -1,6 +1,4 @@
-
 <?php
-
 	//Si el usuario no está logueado lo redirigimos al login
 	require_once 'init.php';
 	if (!$user->isLoggedIn()) {
