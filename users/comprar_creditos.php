@@ -19,8 +19,6 @@
 		$saldo_posterior = $saldo_previo + $_POST['cant_creditos'];
 		$updateQuery = "UPDATE users SET creditos=$saldo_posterior WHERE id=$currentID";
 		mysqli_query($conex, $updateQuery);
-	}else{
-		echo 'No hay data';
 	}
 
 	// $errores='';
