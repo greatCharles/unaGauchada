@@ -20,7 +20,7 @@ $gauchada= obtener_gauchada_por_id($conexion, $id_gauchada);
  }
 
 $gauchada= $gauchada['0'];
-
+$usuario=obtener_usuario_por_id($conexion, $gauchada['6']);
 header('X-Frame-Options: DENY');?>
 <div id="page-wrapper">
 <div class="container">

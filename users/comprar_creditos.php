@@ -1,4 +1,6 @@
+
 <?php
+
 	//Si el usuario no está logueado lo redirigimos al login
 	require_once 'init.php';
 	if (!$user->isLoggedIn()) {
@@ -22,6 +24,16 @@
 	}else{
 		echo 'No hay data';
 	}
+
+	// $errores='';
+	// if(isset($_POST['submit'])){
+	//  	$cod= $POST['cod_seg'];
+	//
+	// 	if($cod < 4){
+	// 		$errores .= 'Codigo de seguridad invalido <br />';
+	//  	}
+	//  }
+
 
  ?>
 
