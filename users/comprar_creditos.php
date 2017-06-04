@@ -24,12 +24,12 @@
 			$updateQuery = "UPDATE users SET creditos=$saldo_posterior WHERE id=$currentID";
 			mysqli_query($conex, $updateQuery);
 			// redirigimos a pantalla de éxito
-			header("Location:compra_exitosa.php?creditos_comprados=".urlencode($_POST['cant_creditos']));  
+			header("Location:compra_exitosa.php?creditos_comprados=".urlencode($_POST['cant_creditos']));
 		}elseif (mb_strlen($num_tarjeta) != 16 || mb_strlen($cod_seg) != 3) {
 			// emitimos alerta
-			echo '<script language="javascript">alert("Asegúrate de que el número de la tarjeta de crédito tenga 16 dígitos y el código de seguridad 4! ");</script>'; 
+			echo '<script language="javascript">alert("Asegúrate de que el número de la tarjeta de crédito tenga 16 dígitos y el código de seguridad 3! ");</script>'; 
 		}
-		
+
 	}
 
 	// $errores='';

@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <?php require_once 'init.php'; ?>
 <?php require_once $abs_us_root.$us_url_root.'users/includes/header.php'; ?>
 <?php require_once $abs_us_root.$us_url_root.'users/includes/navigation.php'; ?>
+<?php require $abs_us_root.$us_url_root.'users/nuestras_configs/funciones.php'; ?>
+<?php require $abs_us_root.$us_url_root.'users/nuestras_configs/config.php'; ?>
 
 <?php if (!securePage($_SERVER['PHP_SELF'])){die();}?>
 
@@ -31,7 +33,8 @@ $get_info_id = $user->data()->id;
 // $groupname = ucfirst($loggedInUser->title);
 $raw = date_parse($user->data()->join_date);
 $signupdate = $raw['month']."/".$raw['day']."/".$raw['year'];
-$userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
+$userdetails = fetchUserDetails(NULL, NULL, $get_info_id);
+$conexion= conexion($bd_config); //Fetch user details
 ?>
 
 <div id="page-wrapper">
@@ -48,7 +51,8 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 		<h1><?=ucfirst($user->data()->username)?></h1>
 		<p><?=ucfirst($user->data()->fname)." ".ucfirst($user->data()->lname)?></p>
 		<p>Miembro desde: <?=$signupdate?></p>
-		<p>Número de ingresos: <?=$user->data()->logins?></p>
+		<!-- <p>Número de ingresos: <?=$user->data()->logins?></p> -->
+		<p>Créditos disponibles: <?php echo getCreditos($conexion, $user->data()->id) ?></p>
 	</div>
 </div>
 </div>

@@ -9,7 +9,7 @@
   <div class="col-xs-12">
   	<div class="jumbotron text-center">
   		<h1>Felicitaciones!</h1>
-  		<p><?php echo 'Compraste ' . $creditos_comprados . ' créditos!' ?></p>
+  		<p><?php echo 'Compraste ' . $creditos_comprados . ' créditos!' ?></p><br><br><br>
   </div>
  </div>
 </div>
